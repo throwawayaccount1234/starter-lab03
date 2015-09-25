@@ -37,4 +37,17 @@ class First extends Application {
 
         $this->render();
     }
+    
+    // called by route "show" 
+    function gimme($id) {
+        $this->data['pagebody'] = 'justone';    // this is the view we want shown
+        
+        // build author (name, quote, and image) to pass on to our view
+        $record = $this->quotes->get($id);
+        $author = array('who' => $record['who'], 'mug' => $record['mug'], 'what' => $record['what']);
+
+        $this->data = array_merge($this->data, $author);
+
+        $this->render();
+    }
 }
