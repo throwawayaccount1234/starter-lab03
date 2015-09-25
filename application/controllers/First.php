@@ -15,8 +15,8 @@ class First extends Application {
 
     function index() {
         $this->data['pagebody'] = 'justone';    // this is the view we want shown
-        // build the author with quote, to pass on to our view
         
+        // build the author (name, quote, and image) to pass on to our view
         $record = $this->quotes->first();
         $author = array('who' => $record['who'], 'mug' => $record['mug'], 'what' => $record['what']);
 
@@ -25,4 +25,16 @@ class First extends Application {
         $this->render();
     }
 
+    // called by route "sleep" 
+    function zzz() {
+        $this->data['pagebody'] = 'justone';    // this is the view we want shown
+        
+        // build Bob Monkhouse (name, quote, and image) to pass on to our view
+        $record = $this->quotes->get('1');
+        $author = array('who' => $record['who'], 'mug' => $record['mug'], 'what' => $record['what']);
+
+        $this->data = array_merge($this->data, $author);
+
+        $this->render();
+    }
 }
